@@ -10,10 +10,11 @@ const ExpressError = require("./utils/ExpressError.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
-async function main() {
-    await mongoose.connect(MONGO_URL);
-}
+const dbUrl = process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/wanderlust";
 
+async function main() {
+    await mongoose.connect(dbUrl);
+}
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
